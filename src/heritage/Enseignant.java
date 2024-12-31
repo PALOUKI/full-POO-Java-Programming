@@ -15,12 +15,11 @@ public class Enseignant extends Personne {
     private String[] matieres;
     
     //Variables de ralation
-    private ArrayList<Etudiant> etudiants;
+    private ArrayList<Etudiant> etudiants = new ArrayList<Etudiant>();
     
     public Enseignant(String nom, String prenom, int age, String[] matieres){
         super(nom, prenom, age);
         this.matieres = matieres;
-        this.etudiants = new ArrayList<Etudiant>();
     }
     
     //setters

@@ -73,8 +73,7 @@ public class Heritage {
             System.out.println(enseignant.getNom() +" "+ enseignant.getPrenom());
         }
         System.out.println("**********************************************************************************************************************************");
-        System.out.println("***************************JAVA relation 1 à 1 entre Etudiant et Ordinateur*******************************************************");
-        Ordinateur ordinateur1 = new Ordinateur("DELL", "LATITUDE 80179", 512, 2.5);
+        System.out.println("***************************JAVA relation 1 à 1 entre Etudiant et Ordinateur*******************************************************");        Ordinateur ordinateur1 = new Ordinateur("DELL", "LATITUDE 80179", 512, 2.5);
         Ordinateur ordinateur2 = new Ordinateur("THINKPAD", "LATITUDE 67712", 256, 2.7);
         etudiant1.setOrdinateur(ordinateur1);
         //Au début l'étudiant 1 n'avait pas d'ordinateur mais maintenant oui
@@ -124,6 +123,34 @@ public class Heritage {
         for (Etudiant etudiant : etudiantsSansOrdinateur) {
             System.out.println(etudiant.getNom() + " n'a aucun ordinateur");
         }
+        System.out.println("**********************************************************************************************************************************");
+        System.out.println("*********JAVA relation plusieurs à plusieurs entre établissements et parcours sachant qu'on ne peut avoir des redondance**********");
+        
+        //creation des établissements
+        Etablissement etablissement1 = new Etablissement("FDS");
+        Etablissement etablissement2 = new Etablissement("EPL");
+        
+        //creation des parcours
+        Parcours parcours1 = new Parcours("SCIENCES MATHEMATIQUES");
+        Parcours parcours2 = new Parcours("SCIENCES MATHEMATIQUES");
+        Parcours parcours3 = new Parcours("GENIE MECANIQUE");
+        
+        etablissement1.addParcours(parcours1);
+        etablissement1.addParcours(parcours2); 
+        
+        //ignorance de parcours2 car le HashSet détectera un doublon
+        System.out.println("Les parcours de l'établissement " + etablissement1.getNom() + " sont:" );
+        for(Parcours parcours : etablissement1.getParcours()){
+            parcours.afficherParcours();
+        }
+        //vérification de la relation bidirectionnelle
+        System.out.println("Vérification de la relation bidirectionnelle");
+        System.out.println("Les établissement du parcours " + parcours1.getNom() + " sont:" );
+        for(Etablissement etablissement : parcours1.getEtablissements()){
+            etablissement.afficherEtablissement();
+        }
+        
+        
         
 
         

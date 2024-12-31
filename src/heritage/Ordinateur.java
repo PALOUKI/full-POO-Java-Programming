@@ -63,10 +63,32 @@ public class Ordinateur {
     public Etudiant getEtudiant(){
         return etudiant;
     }
-    public void setEtudiant(Etudiant etudiant){
+    
+    /*
+        Normalement pour cette méthode nous avons déjà géré l'exception au niveau de setOrdinateur car nous considérions
+        que l'attribution d'ordinateur se fait dans un seul sens mais nous l'avons ajouter ici puisque nous avons écris aussi
+        la méthode setEtudiant. Ici l'attribution peut donc se faire dans les deux sens. Supprimer setEtudiant(Etudiant etudiant)
+        si vous souhaiter uniquement un seul sens donc un étudiant reçoit un ordinateur et pas le contraire.
+    */
+    public void setEtudiant(Etudiant etudiant) {
+        // Vérifie si cet ordinateur est déjà attribué à un autre étudiant
+        if (this.etudiant != null && this.etudiant != etudiant) {
+            throw new IllegalStateException("Cet ordinateur est déjà attribué à un autre étudiant.");
+        }
+
+        // Vérifie si l'étudiant a déjà un autre ordinateur attribué
+        if (etudiant != null && etudiant.getOrdinateur() != null && etudiant.getOrdinateur() != this) {
+            throw new IllegalStateException("Cet étudiant a déjà un autre ordinateur attribué.");
+        }
+
         this.etudiant = etudiant;
-       
+
+        // Met à jour la relation bidirectionnelle
+        if (etudiant != null && etudiant.getOrdinateur() != this) {
+            etudiant.setOrdinateur(this);
+        }
     }
+
     
     
     public String afficherOrdinateur(){
